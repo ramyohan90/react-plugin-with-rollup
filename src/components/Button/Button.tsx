@@ -1,11 +1,12 @@
+import './button.css';
 
 type IProps = {
     label: string;
 }
 
-function Button({ label }: IProps) {
+const Button = ({ label }: IProps) => {
     return (
-        <button type="button">{ label }</button>
+        <button className="custom-button" type="button">{ label }</button>
     )
 }
 
