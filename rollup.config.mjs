@@ -3,6 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
+import terser from '@rollup/plugin-terser';
+
 import packageJson from './package.json' assert { type: 'json' };
 
 export default [
@@ -12,12 +14,12 @@ export default [
             {
                 file: packageJson.main,
                 format: 'cjs',
-                sourcemap: true
+                sourcemap: false
             },
             {
                 file: packageJson.module,
                 format: 'esm',
-                sourcemap: true
+                sourcemap: false
             }
         ],
         plugins: [
@@ -25,6 +27,7 @@ export default [
             commonjs(),
             typescript({ tsconfig: './tsconfig.json', exclude: ['**/*.test.tsx', '**/*.test.ts', '**/*.stories.ts'] }),
             postcss({ extensions: ['.css'], inject: true, extract: false }),
+            terser()
         ]
     },
     {
